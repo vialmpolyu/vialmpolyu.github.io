@@ -149,9 +149,12 @@ In this work, we investigate to what extent LLMs used in such embodied contexts 
                     Video Walkthrough
                 </h3>
                   <div class="text-center">
-                    <video id="v0" width="100%" playsinline loop controls>
+                    <!-- <video id="v0" width="100%" playsinline loop controls>
                         <source src="img/im_supp_video_compressed.mp4" type="video/mp4">
-                   </video>
+                   </video> -->
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/0sJjdxn5kcI" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                </div>
                 </div>
             
             </div>
@@ -167,22 +170,21 @@ In this work, we investigate to what extent LLMs used in such embodied contexts 
                     Approach
                 </h3>
                 <p class="text-justify">
-               We formulate an “inner monologue” by continually adding information from various sources of
- feedback into the language prompts of a planning LLM as the robot interacts with the environment. While LLMs
- have demonstrated exceptional planning capabilities for embodied control tasks, prior works have found
- it crucial to ground LLM predictions with external components such as affordance functions in order
- to produce useful plans that are executable by robots. However, LLMs used in this context have thus far
- remained one-directional – providing a list of skills, without making corrections or leveraging opportunities
- to re-plan accordingly. In contrast, Inner Monologue studies settings where grounded environment feedback
- is provided directly to the LLM in a closed-loop fashion. This promotes improved LLM reasoning in complex
- long-horizon settings, even before any external affordance-based grounding methods are applied.
-   
+               Prior works have shown large language models (LLMs) demonstrate impressive planning capabilities for long-horizon embodied tasks,
+               given arbitrary language instructions. However, it has remained one-directional - the LLM blindly influences the agent and the
+               environment, but no feedback is routed back to the LLM. This issue is particularly prominent when an intermediate action fails
+               during execution, because the LLM is not informed with any feedback. In this work, formulate an <b>inner monologue</b> by continually
+               adding information from various sources of feedback into the language model prompts. While any textual feedback can be incorporated,
+               we focus our studies on three types of feedback: passive scene description, active scene description, and success detection. Passive
+               scene description describes any feedback that is consistently provided in a structured form, such as object recognition results.
+               Active scene description, on the other hand, describes any free-form questions that LLMs may ask and the corresponding unstructured answers provided by
+               a learned model (e.g. a VQA model) or a person. This can also be repurposed to inject human preference during plan generation. Success detection
+               refers to a binary feedback that indicates if the last action was successful, which is particularly useful in many long-horizon settings.
 
               <div class="text-center">
-                    <!-- <video id="v0" width="100%" playsinline loop controls muted autoplay>
-                        <source src="img/im_teaser_compressed.mp4" type="video/mp4">
-                   </video> -->
-                   <image src="img/teaser.png"  class="img-responsive" height="600px"></image>
+                    <video id="v0" width="100%" playsinline loop controls muted autoplay>
+                        <source src="img/method.mp4" type="video/mp4">
+                   </video>
                 </div>
 
 
@@ -218,7 +220,7 @@ we study different Inner Monologue implementations in three environments with di
             Real-World Tabletop Rearrangement
         </h4>
          <p class="text-justify">
-            We demonstrate another implementation of Inner Monologue in a real-world tabletop environment, where perceptual models may be subject to occlusions. We leverage passive scene description (implemented as object recognition) and success detection feedbacks (<i>Object + Success</i>). Given the list of visible objects and past interactions, we prompt the LLM to reason about occluded objects and achieved sub-goals. We show this enables Inner Monologue to complete tasks like "stack all the blocks" and "put bottles and fruits in different plates", even under considerable perturbations to the primitive policy.
+            We demonstrate another implementation of Inner Monologue in a real-world tabletop environment, where perceptual models may be subject to occlusions. We leverage passive scene description (implemented as object recognition) and success detection feedbacks. Given the list of visible objects and past interactions, we prompt the LLM to reason about occluded objects and achieved sub-goals. We show this enables Inner Monologue to complete tasks like "stack all the blocks" and "put bottles and fruits in different plates", even under considerable perturbations to the primitive policy.
         </p>
 
         <div class="text-center">
@@ -232,7 +234,7 @@ we study different Inner Monologue implementations in three environments with di
         </h4>
         <p class="text-justify">
             <!-- In the real kitchen mobile manipulation rearrangement domain, we show that the robot is also successful replan based on success detection results, despite adversarial human intervention. -->
-            The method is also amenable to complex realistic household tasks given wide range of skills outside of pick-and-place. In the video below, we leverage success detection feedback (<i>Success</i>). Although natural failures are already prone to occur in such settings, we use adversarial human interventions to force policy failures in order to demonstrate the replanning capability of Inner Monologue. We show that LLMs can effectively replan if the current or previous plan steps failed. This allows the robot to recover from failures and complete complex tasks like "put a coke in the top drawer", as shown in the video below.
+            The method is also amenable to complex realistic household tasks given wide range of skills outside of pick-and-place. In the video below, we leverage success detection feedback. Although natural failures are already prone to occur in such settings, we use adversarial human interventions to force policy failures in order to demonstrate the replanning capability of Inner Monologue. We show that LLMs can effectively replan if the current or previous plan steps failed. This allows the robot to recover from failures and complete complex tasks like "put a coke in the top drawer", as shown in the video below.
         </p>
 
         <div class="text-center">
@@ -260,7 +262,7 @@ we study different Inner Monologue implementations in three environments with di
 
         <h4>Self-Proposing Goals under Infeasibility</h4>
         <p class="text-justify">
-            Instead of mindlessly following human-given instructions, In-ner Monologue can also act as an interactive problem solver by proposing alternative goals to atempt when the previous goal becomes infeasible.  Below, to solve the task “put any two blocks inside the purple bowl”, Inner Monologue first attempts an action of picking up the purple block – the action fails as the purple block is intentionally made to be too heavy for the robot. After a hint “the purple block is too heavy”, it proposes to “find a lighter block” and successfully solves the task in the end.
+            Instead of mindlessly following human-given instructions, Inner Monologue can also act as an interactive problem solver by proposing alternative goals to atempt when the previous goal becomes infeasible.  Below, to solve the task “put any two blocks inside the purple bowl”, Inner Monologue first attempts an action of picking up the purple block – the action fails as the purple block is intentionally made to be too heavy for the robot. After a hint “the purple block is too heavy”, it proposes to “find a lighter block” and successfully solves the task in the end.
         </p>
         <div class="text-center">
             <video id="v0" width="100%" playsinline loop controls autoplay muted>
@@ -290,7 +292,7 @@ we study different Inner Monologue implementations in three environments with di
 
         <h4>Robustness to Feedback Order</h4>
         <p class="text-justify">
-            In the main experiments of the paper, we prompted the language model following certain conventions. For instance, in the simulated tabletop domain, the convention is [Robot action, Scene, and Robot thought]. In practice, we find that the LLM planner is robust to occasionallys wapping the order of feedback.  In one example, a new human instruction is injected in the middle of plan execution, but this structure has not been seen in the example prompts. Nonetheless, the planner recognizes the change and generates a new “Robot thought: Goal state is. . . ” statement allowing it to solve the new task.
+            So far we prompted the language model following certain conventions. For instance, in the simulated tabletop domain, the convention is [Robot action, Scene, and Robot thought]. In practice, we find that the LLM planner is robust to occasionallys wapping the order of feedback.  In one example, a new human instruction is injected in the middle of plan execution, but this structure has not been seen in the example prompts. Nonetheless, the planner recognizes the change and generates a new “Robot thought: Goal state is. . . ” statement allowing it to solve the new task.
         </p>
         <div class="text-center">
             <video id="v0" width="100%" playsinline loop controls autoplay muted>
@@ -300,7 +302,7 @@ we study different Inner Monologue implementations in three environments with di
 
         <h4>Robustness to Typos</h4>
         <p class="text-justify">
-            Inherited from the LLM backbone, our approach is robust to typos in human instruction.
+            Inherited from the LLM backbone, our approach is also robust to typos in human instruction.
         </p>
         <div class="text-center">
             <video id="v0" width="100%" playsinline loop controls autoplay muted>
