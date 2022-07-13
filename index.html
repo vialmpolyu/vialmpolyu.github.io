@@ -250,7 +250,7 @@ we study different Inner Monologue implementations in three environments with di
         
         <h4>Continued Adaptation to New Instructions</h4>
         <p class="text-justify">
-            Although not explicitly prompted, the LLM planner can react to human interaction that changes the high-level goal mid-task.  Fig 5a demonstrates a challenging case, where <i>Human</i> feedback changes the goal during the plan execution, and then changes the goal yet again by saying “finish the previous task”. We can see that the planner incorporates the feedback correctly by switching tasks twice.  In another instance, despite not being explicitly prompted to terminate after a human says “please stop”, the LLM planner generalizes to this scenario and predicts a “done” action.
+            Although not explicitly prompted, the LLM planner can react to human interaction that changes the high-level goal mid-task.  Below we show a challenging case, where <i>Human</i> feedback changes the goal during the plan execution, and then changes the goal yet again by saying “finish the previous task”. We can see that the planner incorporates the feedback correctly by switching tasks twice.  In another instance, despite not being explicitly prompted to terminate after a human says “please stop”, the LLM planner generalizes to this scenario and predicts a “done” action.
         </p>
         <div class="text-center">
             <video id="v0" width="100%" playsinline loop controls autoplay muted>
@@ -260,26 +260,32 @@ we study different Inner Monologue implementations in three environments with di
 
         <h4>Self-Proposing Goals under Infeasibility</h4>
         <p class="text-justify">
-            Instead of mindlessly following human-given instructions, In-ner Monologue can also act as an interactive problem solver by proposing alternative goals to atempt when the previous goal becomes infeasible.  In Fig 5b, to solve the task “put any two blocks inside the purple bowl”, Inner Monologue first attempts an action of picking up the purple block – the action fails as the purple block is intentionally made to be too heavy for the robot. After a hint “the purple block is too heavy”, it proposes to “find a lighter block” and successfully solves the task in the end.
+            Instead of mindlessly following human-given instructions, In-ner Monologue can also act as an interactive problem solver by proposing alternative goals to atempt when the previous goal becomes infeasible.  Below, to solve the task “put any two blocks inside the purple bowl”, Inner Monologue first attempts an action of picking up the purple block – the action fails as the purple block is intentionally made to be too heavy for the robot. After a hint “the purple block is too heavy”, it proposes to “find a lighter block” and successfully solves the task in the end.
         </p>
         <div class="text-center">
-            <image src="img/emergent_spontaneous.png"  class="img-responsive" height="600px"></image>
+            <video id="v0" width="100%" playsinline loop controls autoplay muted>
+                <source src="img/emergent_spontaneous.mp4" type="video/mp4">
+            </video>
         </div>
 
         <h4>Multilingual Interaction</h4>
         <p class="text-justify">
-            Pre-trained LLMs are known to be able to translate from one language to another, without any finetuning. We observe that such multilingual understanding also transfers to the embodied settings considered in this work. Specifically, in Fig 5c, the human-provided new instruction is written in Chinese, but the LLM can correctly interpret it, re-narrate it as a concrete goal to execute in English, and accordingly replan its future actions. Occasionally, we find that this capability even extends to symbols and emojis.
+            Pre-trained LLMs are known to be able to translate from one language to another, without any finetuning. We observe that such multilingual understanding also transfers to the embodied settings considered in this work. Specifically, the human-provided new instruction is written in Chinese, but the LLM can correctly interpret it, re-narrate it as a concrete goal to execute in English, and accordingly replan its future actions. Occasionally, we find that this capability even extends to symbols and emojis.
         </p>
         <div class="text-center">
-            <image src="img/emergent_multilingual.png"  class="img-responsive" height="600px"></image>
+            <video id="v0" width="100%" playsinline loop controls autoplay muted>
+                <source src="img/emergent_multilingual.mp4" type="video/mp4">
+            </video>
         </div>
 
         <h4>Interactive Scene Understanding</h4>
         <p class="text-justify">
-            We also observe that Inner Monologue demonstrates interactive understanding of the scene using the past actions and environment feedback as context.  In Fig 5d, aftera task instruction has been executed, we turn to ask questions about the scene, again a structure that has not appeared in the prompt.  Surprisingly, we find that it can often correctly answer these questions that require temporal and embodied reasoning.
+            We also observe that Inner Monologue demonstrates interactive understanding of the scene using the past actions and environment feedback as context.  Below, after a task instruction has been executed, we turn to ask questions about the scene, again a structure that has not appeared in the prompt.  Surprisingly, we find that it can often correctly answer these questions that require temporal and embodied reasoning.
         </p>
         <div class="text-center">
-            <image src="img/emergent_scene_understanding.png"  class="img-responsive" height="600px"></image>
+            <video id="v0" width="100%" playsinline loop controls autoplay muted>
+                <source src="img/emergent_scene.mp4" type="video/mp4">
+            </video>
         </div>
 
         <h4>Robustness to Feedback Order</h4>
@@ -287,15 +293,19 @@ we study different Inner Monologue implementations in three environments with di
             In the main experiments of the paper, we prompted the language model following certain conventions. For instance, in the simulated tabletop domain, the convention is [Robot action, Scene, and Robot thought]. In practice, we find that the LLM planner is robust to occasionallys wapping the order of feedback.  In one example, a new human instruction is injected in the middle of plan execution, but this structure has not been seen in the example prompts. Nonetheless, the planner recognizes the change and generates a new “Robot thought: Goal state is. . . ” statement allowing it to solve the new task.
         </p>
         <div class="text-center">
-            <image src="img/emergent_replan_ravens.png"  class="img-responsive" height="600px"></image>
+            <video id="v0" width="100%" playsinline loop controls autoplay muted>
+                <source src="img/emergent_feedback_order.mp4" type="video/mp4">
+            </video>
         </div>
 
         <h4>Robustness to Typos</h4>
         <p class="text-justify">
-            Inherited from the LLM backbone, our approach is robust to typos in human instruction:
+            Inherited from the LLM backbone, our approach is robust to typos in human instruction.
         </p>
         <div class="text-center">
-            <image src="img/emergent_typos.png"  class="img-responsive" height="600px"></image>
+            <video id="v0" width="100%" playsinline loop controls autoplay muted>
+                <source src="img/emergent_typos.mp4" type="video/mp4">
+            </video>
         </div>
 
 	    </div>
@@ -309,7 +319,7 @@ we study different Inner Monologue implementations in three environments with di
                     <textarea id="bibtex" class="form-control" readonly="" style="display: none;">@inproceedings{huang2022inner,
     title={Inner Monologue: Embodied Reasoning through Planning with Language Models},
     author={Wenlong Huang and Fei Xia and Ted Xiao and Harris Chan and Jacky Liang and Pete Florence and Andy Zeng and Jonathan Tompson and Igor Mordatch and Yevgen Chebotar and Pierre Sermanet and Noah Brown and Tomas Jackson and Linda Luu and Sergey Levine and Karol Hausman and Brian Ichter},
-    booktitle={arXiv preprint arXiv:2207.aaaaa},
+    booktitle={arXiv preprint arXiv:2207.05608},
     year={2022}
 }</textarea>
             </div>
